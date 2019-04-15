@@ -47,19 +47,20 @@ module TinCanApi
           req.body = statement.serialize(latest_version).to_json
         end
       end
-      LrsResponse.new do |lrs|
-        lrs.status = response.status
-        lrs.content = statement
-        if response.status == 200
-          statement.id = JSON.parse(response.body).first
-          lrs.success = true
-        elsif response.status == 204
-          lrs.success = true
-        else
-          lrs.success = false
-          lrs.error_message = JSON.parse(response.body)['message']
-        end
-      end
+      return response
+      #LrsResponse.new do |lrs|
+      #  lrs.status = response.status
+      #  lrs.content = statement
+      #  if response.status == 200
+      #    statement.id = JSON.parse(response.body).first
+      #    lrs.success = true
+      #  elsif response.status == 204
+      #    lrs.success = true
+      #  else
+      #    lrs.success = false
+      #    lrs.error_message = JSON.parse(response.body)['message']
+      #  end
+      #end
     end
 
     def save_statements(statements)
